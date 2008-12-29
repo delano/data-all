@@ -1,0 +1,21 @@
+CHANGES
+lib/Data/Access.pm
+lib/Data/All.pm
+lib/Data/All/Base.pm
+lib/Data/All/Format.pm
+lib/Data/All/Format/Base.pm
+lib/Data/All/Format/Delim.pm
+lib/Data/All/Format/Fixed.pm
+lib/Data/All/Format/XML.pm
+lib/Data/All/IO.pm
+lib/Data/All/IO/Base.pm
+lib/Data/All/IO/Database.pm
+lib/Data/All/IO/FTP.pm
+lib/Data/All/IO/Plain.pm
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+README
+t/Data-All.t
+t/sample.csv
+t/sample.fixed
