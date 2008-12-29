@@ -1,9 +1,7 @@
 bin
-bin/example-basic
 CHANGES
 lib
 lib/Data
-lib/Data/Access.pm
 lib/Data/All
 lib/Data/All/Base.pm
 lib/Data/All/Format
