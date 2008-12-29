@@ -13,15 +13,15 @@ To install this module type the following:
 
 DEPENDENCIES
 
-IO::All
-Spiffy
+File::Spec
+Regexp::Common
 Text::Parsewords
 Class::Factory
 
 
-COPYRIGHT AND LICENCE
+COPYRIGHT AND LICENSE
 
-Copyright (C) 2004 by Delano Mandelbaum
+Copyright (C) 2009 by Delano Mandelbaum, delano@cpan.org
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.3 or,
