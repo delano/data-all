@@ -14,7 +14,7 @@ use Data::Dumper;
 use Data::All::Base;
 use Data::All::IO;
 
-our $VERSION = 0.040;
+our $VERSION = 0.042;
 our @EXPORT = qw(collection);
 
 ##  PUBLIC INTERFACE

@@ -10,6 +10,8 @@ use base 'Exporter';
 
 our @EXPORT = qw(new internal attribute populate  error );
 
+our $VERSION = 1.0;
+
 sub internal;
 internal 'ERROR'	=> [];
 

@@ -11,6 +11,8 @@ use warnings;
 use Data::All::Base;
 use Data::All::Format;
 
+our $VERSION = 0.13;
+
 use base 'Exporter';
 our @EXPORT = qw(new internal attribute populate error init	_load_format 
 				 getrecords putrecords array_to_hash hash_to_array getrecord_hash

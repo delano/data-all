@@ -10,6 +10,8 @@ use IO::File;
 use FileHandle;
 
 
+our $VERSION = 0.11;
+
 internal 'IO';
 internal 'fh';
 
