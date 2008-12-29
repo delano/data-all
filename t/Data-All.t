@@ -16,16 +16,16 @@ use FindBin;
 my %infile = (
 	path	=> $FindBin::Bin . '/sample.csv',
 	profile => 'csv',
-	ioconf  => ['plain', 'r']
+	ioconf  => ['file', 'r']
 );
 
 my %outfile = (
         path    => $FindBin::Bin . '/sample.fixed',
         format	=> ['fixed', "\n", [16,4,32,32]],
-        ioconf  => ['plain', 'w']
+        ioconf  => ['file', 'w']
 );
 
-my $da = Data::All->new(from =>\%infile, to=> \%outfile);
+my $da = Data::All->new(source =>\%infile, target=> \%outfile);
 
 $da->open();
 
@@ -34,6 +34,8 @@ my $rec = $da->read();
 ok($#{ $rec } == 2, "Check record count");
 ok(exists($rec->[0]->{'name'}), "Check field names");
 
-$da->convert();
+$da->close();
 
-ok(1);
+$da->convert(source =>\%infile, target=> \%outfile);
+
+ok(1, "Lookin' good")
