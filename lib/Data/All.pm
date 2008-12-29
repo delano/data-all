@@ -32,10 +32,10 @@ sub open;
 
 ##  PUBLIC ATTRIBUTES
 ##  i.e. $da->source()
-attribute         'source';
+attribute           'source';
 attribute           'target';
-attribute 'print_fields'        => 0;
-attribute       'atomic'        => 1;
+attribute     'print_fields' => 0;
+attribute           'atomic' => 1;
 
 
 ##  PRIVATE ATTRIBUTES
@@ -69,7 +69,7 @@ internal 'default'     =>
     filters => '',
     ioconf  => 
     { 
-        type    => 'plain', 
+        type    => 'file', 
         perm    => 'r', 
         with_original => 0 
     },
@@ -465,38 +465,29 @@ __END__
 
 Data::All - Access to data in many formats source many places
 
-=head1 WARNING!
-I have added versions of IO::All and Spiffy to the Data:All 
-distribution b/c it requires these specific versions and 
-the Data::All rewrite that doesn't use IO:All is incomplete. 
-This could overwrite newer versions of these modules you
-currently have installed. If you still want to use Data::All
-I recommend installing it to a non-standard location such
-as under your project/lib directory using something like:
-
-$ perl Makefile.PL PREFIX=/path/to/install
+=head1 WARNING! This is a preview release. 
+Version 0.040 is the first version to remove the libraries Spiffy and IO::All. 
+These changes are fresh and need more testing but I decided to update CPAN since
+the previous version 0.036 is broken. This is a preview release and should be
+treated as a novelty until the preview status is removed. 
 
 
 =head1 SYNOPSIS 1 (short)
 
     use Data::All;
-    
-    #   Create an instance of Data::All for database data
-    my $input = Data::All->new(
-        source => { path => '/some/file.csv', profile => 'csv' },
-        target   => { path => '/tmp/file.tab',  profile => 'tab'}
-    );
-    
-    #   $rec now contains an arrayref of hashrefs for the data defined in %db.
-    #   collection() is a shortcut (see Synopsis 2)
-    my $rec  = $input1->read();
 
-    #   Convert "source" to "target"
-    $input->convert(); 
+	#   Create an instance of Data::All for database data
+	my $input1 = Data::All->new(
+	    source => { path => 'sample.csv', profile => 'csv' },
+	    target   => { path => 'sample.tab',  profile => 'tab', ioconf  => ['file', 'w']}
+	);
 
-    #   $rec is the same above   
-    #   NOTE: The hash reference here is different than the hash used by new()
-    my $rec = collection({'path' => '/some/file.csv', profile => 'csv'});
+	#   $rec now contains an arrayref of hashrefs for the data defined in %db.
+	my $rec  = $input1->read();
+
+    #   Convert "source" to "target" and include the field names
+    $input1->convert(print_fields => 1); 
+
     
 =head1 SYNOPSIS 2 (long)
 
@@ -554,19 +545,17 @@ $ perl Makefile.PL PREFIX=/path/to/install
     
     #   Create an instance of Data::All for database data.
     #   Note: parameters can also be a hash or hashref
-    my $input1 = Data::All->new({
+    my $input2 = Data::All->new({
         source => %db1, 
         target => \%db2,
         print_fields => 0,              #   Do not output field name record
         atomic => 1                     #   Load the input completely before outputting
     });
     
-    $input1->convert();                 #   Save the mysql data to the postgresql table 
-    $input1->convert(target => \%file1);    #   And also save it to a CSV format
-    $input1->convert(target => \%file2);    #   And also save it to a fixed format
+    $input2->convert();                 #   Save the mysql data to the postgresql table 
+    $input2->convert(target => \%file1);    #   And also save it to a CSV format
+    $input2->convert(target => \%file2);    #   And also save it to a fixed format
     
-    #   Read the fixed file we just created into an arrayref of hashes
-    my $records = collection(source => \%file2);    
     
 =head1 DESCRIPTION
 
@@ -576,7 +565,7 @@ to be used across any number of data sources (delimited file, XML over a socket,
 a database table, etc...). 
 
 Supported formats: delimited and fixed (for filesystem types)
-Supported sources: local filesystem, database, socket (not heavily tested).
+Supported sources: local filesystem, database
 
 Similar to AnyData, but more suited towards converting data types 
 source and to various sources rather than reading data and playing with it. It is
@@ -586,10 +575,6 @@ gives you access to data.
 Conversion now happens record by record by default. You can set this explicitly
 by sending atomic => 1 or 0 [default] through to new() or convert(). 
 
-Data::All is a Spiffy module so you should be able to subclass Data::All or any
-of the Data::All::* classes to suite your own needs. It was written with Spiffy 
-0.15 but should work with later versions (depending on Spiffy's version to 
-version compatibility!).
 
 =head1 TODO LIST
 
@@ -607,16 +592,6 @@ TODO:Consider using a standard internal structure, so every source is converted 
 TODO:Add SQL as a readable input and output
 TODO:Expose format functions to Data::All users so simple single record conversion can be thoroughly utilized.
 
-=head1 STABILITY
-
-This module is currently undergoing rapid development and there is much left to 
-do. It is still in the alpha stage, so it is definitely not recommended for
-production use. In particular the interface(s) have changed and may change 
-again. I have personally been tested it on Solaris 8 (SPARC64) and FreeBSD 4.9 
-(i386). Because of the way Data::All::IO::Plain and Data::All::IO::FTP treat
-filepaths, Data::All will have problems on non-*nix platforms. I will eventually
-get around to making Data::All platform independant, but other features take
-priority. You're welcome to write a patch and send it to me though :]
 
 =head1 KNOWN BUGS
 
@@ -626,17 +601,15 @@ to be newline (for delimited and fixed formats).
 - If the first column is empty, it may screw up Data::All::Format::Delim (it
 will return undef for that column and the remaining columns with shift left)
 
-=head1 SEE ALSO
-
-IO::All, AnyData, Spiffy
 
 =head1 AUTHOR
 
-Delano Mandelbaum, E<lt>horrible<AT>murderer.caE<gt>
+Delano Mandelbaum, E<lt>delano<AT>cpan.orgE<gt>
+
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2004 by Delano Mandelbaum
+Copyright (C) 2009 by Delano Mandelbaum
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.3 or,

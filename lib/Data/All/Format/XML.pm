@@ -20,6 +20,7 @@ our @EXPORT = qw(new internal attribute populate error init	_load_format);
 attribute 'format'  => '';
 attribute 'encoding' => '';
 
+attribute 'type';
 
 sub expand($);
 sub contract(\@);
@@ -65,26 +66,5 @@ sub pack_template()
 
 
 
-
-
-
-
-
-
-#   $Log: XML.pm,v $
-#   Revision 1.1.1.1  2005/05/10 23:56:20  dmandelbaum
-#   initial import
-#
-#   Revision 1.1.1.1.8.3  2004/08/12 18:40:47  dmandelbaum
-#   *** empty log message ***
-#
-#   Revision 1.1.1.1.8.1  2004/04/16 17:10:34  dmandelbaum
-#   - Merging libperl-016 changes into the libperl-1-current trunk
-#
-#   Revision 1.1.1.1.2.1  2004/03/25 01:47:11  dmandelbaum
-#   - Initial import of modules
-#   - Included CVS Id and Log variables
-#   - Added use strict; to a few unlucky modules
-#
 
 1;

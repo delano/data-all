@@ -10,7 +10,16 @@ use Data::Dumper;
 use Class::Factory;
 use Data::All;
 
+#   Create an instance of Data::All for database data
+my $input1 = Data::All->new(
+    source => { path => [$FindBin::Bin, '/../t/sample.csv'], profile => 'csv' },
+    target   => { path => $FindBin::Bin . '/../t/sample.tab',  profile => 'tab', ioconf  => ['file', 'w']}
+);
 
+#   $rec now contains an arrayref of hashrefs for the data defined in %db.
+my $rec  = $input1->convert(print_fields => 1);
+
+print Dumper($rec);
 
 my %in2 = (
 	path	=> $FindBin::Bin . '/../t/sample.csv',
@@ -43,10 +52,8 @@ my %delanotes_out = (
 	);
 	
 #my $da = Data::All->new(source =>\%in2, target => \%out2);
-my $da = Data::All->new(source =>\%db_r, target => \%delanotes_out);
-
-
-$da->convert();
+#my $da = Data::All->new(source =>\%db_r, target => \%delanotes_out);
+#$da->convert();
 
 
 

@@ -37,9 +37,8 @@ sub open($)
         : $self->_get_file();
     
     my $fh = FileHandle->new($filepath, $self->ioconf()->{'perm'}); 
-    my $IO = io(-file_handle => $fh);
+    my $IO = $fh;
     
-    $IO->autoclose(1);
     
     $self->__IO( $IO );
     $self->__fh( $fh );
@@ -139,24 +138,6 @@ sub _put_file()
         
     undef $ftp;
 }
-
-
-#   $Log: FTP.pm,v $
-#   Revision 1.1.1.1  2005/05/10 23:56:20  dmandelbaum
-#   initial import
-#
-#   Revision 1.1.2.6  2005/01/04 18:46:15  dmandelbaum
-#   *** empty log message ***
-#
-#   Revision 1.1.2.5  2004/08/12 18:40:47  dmandelbaum
-#   *** empty log message ***
-#
-#   Revision 1.1.2.3  2004/05/11 04:01:26  dmandelbaum
-#   *** empty log message ***
-#
-#   Revision 1.1.2.1  2004/05/10 07:23:30  dmandelbaum
-#   - Added Data/All/IO/FTP.pm
-#
 
 
 1;
