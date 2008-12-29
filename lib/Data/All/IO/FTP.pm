@@ -1,6 +1,6 @@
 package Data::All::IO::FTP;
 
-#   $Id: FTP.pm,v 1.1.1.1 2005/05/10 23:56:20 dgrant Exp $
+#   $Id: FTP.pm,v 1.1.1.1 2005/05/10 23:56:20 dmandelbaum Exp $
 
 
 use strict;
@@ -142,19 +142,19 @@ sub _put_file()
 
 
 #   $Log: FTP.pm,v $
-#   Revision 1.1.1.1  2005/05/10 23:56:20  dgrant
+#   Revision 1.1.1.1  2005/05/10 23:56:20  dmandelbaum
 #   initial import
 #
-#   Revision 1.1.2.6  2005/01/04 18:46:15  dgrant
+#   Revision 1.1.2.6  2005/01/04 18:46:15  dmandelbaum
 #   *** empty log message ***
 #
-#   Revision 1.1.2.5  2004/08/12 18:40:47  dgrant
+#   Revision 1.1.2.5  2004/08/12 18:40:47  dmandelbaum
 #   *** empty log message ***
 #
-#   Revision 1.1.2.3  2004/05/11 04:01:26  dgrant
+#   Revision 1.1.2.3  2004/05/11 04:01:26  dmandelbaum
 #   *** empty log message ***
 #
-#   Revision 1.1.2.1  2004/05/10 07:23:30  dgrant
+#   Revision 1.1.2.1  2004/05/10 07:23:30  dmandelbaum
 #   - Added Data/All/IO/FTP.pm
 #
 
